@@ -5,6 +5,21 @@
 #include <exception>
 
 using namespace std;
+static std::map<std::string, Mode> mode_map = {
+  {"absolute", Mode::ABSOLUTE},  
+  {"absolute,X", Mode::ABSOLUTE_X},  
+  {"absolute,Y", Mode::ABSOLUTE_Y},  
+  {"accumulator", Mode::ACCUMULATOR},  
+  {"immediate", Mode::IMMEDIATE},  
+  {"implied", Mode::IMPLIED},  
+  {"indirect", Mode::INDIRECT},  
+  {"(indirect,X)", Mode::INDIRECT_X},  
+  {"(indirect),Y", Mode::INDIRECT_Y},  
+  {"(PC+2)", Mode::PC_2},  
+  {"relative", Mode::RELATIVE},  
+  {"zeropage", Mode::ZEROPAGE},  
+  {"zeropage,X", Mode::ZEROPAGE_X},  
+  {"zeropage,Y", Mode::ZEROPAGE_Y}};
 
 class bad_opcode : public std::exception {
 public:
