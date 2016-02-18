@@ -13,8 +13,8 @@ public:
   Assembler(Assembler&&) = delete;
   Assembler& operator=(Assembler&&) = delete;
   virtual  ~Assembler() {}
-  virtual int opcode(const std::string& instruction) const = 0;
-  virtual void process(const std::string& in, std::ostream& out, Format fmt) const = 0;
+  virtual void process(const std::string& line, 
+		       std::ostream& out, Format fmt) const = 0;
 };
 
 #endif
