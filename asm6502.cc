@@ -21,6 +21,9 @@ static std::map<std::string, Mode> mode_map = {
   {"zeropage,X", Mode::ZEROPAGE_X},  
   {"zeropage,Y", Mode::ZEROPAGE_Y}};
 
+static std::vector<std::string> args = { "A", "(oper)", "#oper", "oper", "(oper,X)", 
+				  "oper,X", "(oper),Y", "oper,Y" };
+
 class bad_opcode : public std::exception {
 public:
   const char* what() const throw() {
@@ -29,7 +32,7 @@ public:
 } bad_opcode_exception;
 
 void Asm6502Instruction::convert(const std::string& args, 
-				 std::vector<int>& byte_vec) const {
+				 std::vector<unsigned>& byte_vec) const {
   
 }
 
@@ -42,8 +45,9 @@ Asm6502::Asm6502() {
   }
 }
 
-std::vector<std::string> args = { "A", "(oper)", "#oper", "oper", "(oper,X)", 
-				  "oper,X", "(oper),Y", "oper,Y" };
+Asm6502Instruction Asm6502::get_instruction(const std::string& symbol, Mode mode) const {
+  return symbol_map.find(symbol)->second.opcode_map.find(mode)->second;
+}
 
 void Asm6502::parse_instruction(const std::string& line) {
   std::istringstream iss(line);

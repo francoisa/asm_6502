@@ -19,7 +19,7 @@ int main(int argc, char* argv[]) {
   }
   else {
     std::string asm_file;
-    std::cout << "Enter a assembly file: ";
+    std::cout << "Enter an assembly file: ";
     while (std::cin >> asm_file) {
       process(asm_file, std::cout, Format::TEXT);
       std::cout << "Enter a assembly file: ";
