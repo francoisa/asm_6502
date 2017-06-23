@@ -1,11 +1,11 @@
 TGT = asm6502
 TST = test/$(TGT).t
 OBJS =$(patsubst %.cc,.obj/%.o,$(wildcard *.cc))
-CXX =g++
-CC =g++
+CXX =clang++-3.5
+CC =clang-3.5
 DEBUG =-g
 GTEST =../googletest/
-CXXFLAGS = -Wall -std=gnu++0x -I. -I$(GTEST)/include $(DEBUG)
+CXXFLAGS = -Wall -std=c++11 -I. -I$(GTEST)/include $(DEBUG)
 TESTLIBS = -L$(GTEST) -lgtest
 
 $(TGT): $(OBJS)
@@ -14,7 +14,10 @@ $(TGT): $(OBJS)
 $(TST): .obj/asm6502.o test/.obj/asm6502.t.o
 	$(LINK.cc) $^ $(LOADLIBS) $(TESTLIBS) -o $@
 
-.obj/%.o: %.cc
+.obj:
+	mkdir .obj
+
+.obj/%.o: %.cc .obj
 	$(COMPILE.cc) $(OUTPUT_OPTION) $<
 
 test/.obj/%.o: test/%.cc
